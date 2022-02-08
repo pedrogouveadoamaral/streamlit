@@ -42,7 +42,7 @@ else:
     titulo = titulo + '(todas as variantes)'
     
 
-dfShow   = df.groupby(by=["date"]).sum()
+dfShow = df.groupby(by=["date"]).sum()
 
 import plotly.express as px
 
