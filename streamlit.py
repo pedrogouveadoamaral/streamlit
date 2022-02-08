@@ -8,3 +8,4 @@ df = pd.read_csv('covid-variants.csv')
 pais = list(df['location'].unique())
 
 variante = list(df['location'].unique())
+
