@@ -6,6 +6,8 @@ import plotly.express as px
 df = pd.read_csv('covid-variants.csv')
 
 df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+dfShow = df.groupby(by=["date"]).sum()
+
 paises = list(df['location'].unique())
 variants = list(df['variant'].unique())
 
@@ -31,15 +33,13 @@ else:
     st.text('Mostrando dados para todas as variantes')
     titulo = titulo + '(todas as variantes)'
 
-dfShow = df.groupby(by=["date"]).sum()
 
+# Gráfico 1
 fig = px.line(dfShow, x=dfShow.index, y='num_sequences')
 fig.update_layout(title=titulo)
 st.plotly_chart(fig, use_container_width=True)
 
-df2 = px.data.tips()
-print(df2)
-fig2 = px.pie(df, names='variant', values='num_sequences')
-fig.update_layout(title=titulo)
+# Gráfico 2
+fig2 = px.histogram(df, x='location', y='num_sequences', color='variant')
+fig2.update_layout(title='Proporção de todas as variantes')
 st.plotly_chart(fig2, use_container_width=True)
-
